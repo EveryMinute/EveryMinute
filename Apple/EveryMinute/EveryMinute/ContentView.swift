@@ -9,25 +9,51 @@ import SwiftUI
 import CoreData
 
 internal struct ContentView: View {
-    @Environment(\.managedObjectContext) private var viewContext
-    
     var body: some View {
         NavigationSplitView {
-            VStack(alignment: .leading, spacing: 10) {
-                Label("Today", systemImage: "clock")
+            VStack(alignment: .leading, spacing: 16) {
+                NavigationLink {
+                    TodayView()
+                } label: {
+                    Label("Today", systemImage: "clock")
+                }
                 Divider()
-                Label("Home", systemImage: "house")
-                Label("Calendar", systemImage: "calendar")
-                Label("Tasks", systemImage: "clipboard")
+                NavigationLink {
+                    HomeView()
+                } label: {
+                    Label("Home", systemImage: "house")
+                }
+                NavigationLink {
+                    
+                } label: {
+                    Label("Calendar", systemImage: "calendar")
+                }
+                NavigationLink {
+                    
+                } label: {
+                    Label("Tasks", systemImage: "clipboard")
+                }
+                Spacer()
+                #if os(macOS)
+                NavigationLink {
+                    SettingsLink()
+                } label: {
+                    Label("Settings", systemImage: "gear")
+                }
+                #endif
             }
+            .buttonStyle(.plain)
             .padding(.all, 16)
-            Spacer()
+            
+        } content: {
+            
         } detail: {
             
         }
+        .navigationTitle("EveryMinute")
     }
 }
 
 #Preview {
-    ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+    ContentView()
 }
