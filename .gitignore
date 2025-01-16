@@ -1,0 +1,5 @@
+# macOS related
+.DS_Store
+
+# Xcode related
+**/xcuserdata/
