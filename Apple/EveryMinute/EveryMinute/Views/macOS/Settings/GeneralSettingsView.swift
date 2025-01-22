@@ -10,7 +10,10 @@ import SwiftUI
 struct GeneralSettingsView: View {
     var body: some View {
         VStack {
-            
+            List {
+                Text("Test")
+                Text("Display something")
+            }
         }
     }
 }

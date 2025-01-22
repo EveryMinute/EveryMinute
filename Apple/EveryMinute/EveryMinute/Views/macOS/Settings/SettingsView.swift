@@ -13,9 +13,8 @@ internal struct SettingsView: View {
             Tab("General", systemImage: "gear") {
                 GeneralSettingsView()
             }
-            Tab("Advanced", systemImage: "plus") {
-                
-            }
+//            Tab("Advanced", systemImage: "plus") {
+//            }
             Tab("About", systemImage: "info") {
                 AboutSettingsView()
             }
