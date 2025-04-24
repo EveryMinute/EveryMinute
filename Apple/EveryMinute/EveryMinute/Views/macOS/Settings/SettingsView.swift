@@ -18,6 +18,9 @@ internal struct SettingsView: View {
             Tab("About", systemImage: "info") {
                 AboutSettingsView()
             }
+            Tab("Security", systemImage: "shield") {
+                SecuritySettingsView()
+            }
         }
     }
 }

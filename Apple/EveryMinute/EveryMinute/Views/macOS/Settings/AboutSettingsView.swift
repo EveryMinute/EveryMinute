@@ -12,14 +12,14 @@ struct AboutSettingsView: View {
         List {
             Section {
                 HStack {
-                    Text("version")
+                    Text("Version")
                     Spacer()
-                    Text("TODO: add app version")
+                    Text(getAppVersion())
                 }
                 HStack {
-                    Text("build")
+                    Text("Build")
                     Spacer()
-                    Text("TODO: add build version")
+                    Text(getBuildVersion())
                 }
             } header: {
                 Text("App")
@@ -27,12 +27,31 @@ struct AboutSettingsView: View {
                 Text("Build with ❤️‍🔥 using Swift & SwiftUI")
             }
             Section {
-                
+                // Nothing, because this is only a text section definied in the footer of this section
             } header: {
                 Text("Legal")
             } footer: {
-                Text("© 2025 Julian Schumacher")
+                VStack(alignment: .leading) {
+                    Text("© 2025 Julian Schumacher & Rachel Sprio")
+                    Text("Privacy Policy and Data Security Policy can be found unter https://julianschumacher.dev/legal/privacy")
+                }
             }
+        }
+    }
+    
+    private func getAppVersion() -> String {
+        if let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
+            return appVersion
+        } else {
+            return "Unkown"
+        }
+    }
+    
+    private func getBuildVersion() -> String {
+        if let buildVersion = Bundle.main.infoDictionary?["CFBundleVersion"] as? String {
+            return buildVersion
+        } else {
+            return "Unkown"
         }
     }
 }

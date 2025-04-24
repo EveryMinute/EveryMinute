@@ -47,10 +47,20 @@ struct PersistenceController {
                  * The store could not be migrated to the current model version.
                  Check the error message to determine what the actual problem was.
                  */
+                print(error)
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
+#if !os(macOS)
+        // Core Data Encryption Idea from: https://cocoacasts.com/is-core-data-encrypted
+        container.persistentStoreDescriptions.first!.setOption(
+            FileProtectionType.complete as NSObject,
+            forKey: NSPersistentStoreFileProtectionKey
+        )
+#endif
         container.viewContext.automaticallyMergesChangesFromParent = true
         container.viewContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
+        container.viewContext.retainsRegisteredObjects = true
+        container.viewContext.shouldDeleteInaccessibleFaults = true
     }
 }

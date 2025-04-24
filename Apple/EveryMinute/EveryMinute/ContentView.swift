@@ -6,23 +6,24 @@
 //
 
 import SwiftUI
-import CoreData
 
 internal struct ContentView: View {
     
-    private var statusBarObjects : [StatusbarItem] = []
+    @State private var addShown : Bool = false
     
     var body: some View {
         NavigationSplitView {
 #if os(iOS)
-            List {
-                sidebarList()
+            AddItemMenuWrapper(types: AddType.allCases) {
+                List {
+                    sidebarList()
+                }
+                .navigationTitle("EveryMinute")
+                .navigationBarTitleDisplayMode(.automatic)
             }
-            .navigationTitle("EveryMinute")
-            .navigationBarTitleDisplayMode(.automatic)
 #endif
 #if os(macOS)
-            Group {
+            VStack {
                 VStack(alignment: .leading, spacing: 20) {
                     sidebarList()
                 }
@@ -35,7 +36,7 @@ internal struct ContentView: View {
             .buttonStyle(.plain)
 #endif
         } content: {
-            TodayView()
+            ViewWrapper(types: AddType.allCases, view: .today)
         } detail: {
             Label("Select something to display more", systemImage: "questionmark")
         }
@@ -43,31 +44,29 @@ internal struct ContentView: View {
     
     @ViewBuilder
     private func sidebarList() -> some View {
-            NavigationLink {
-                TodayView()
-            } label: {
-                Label("Today", systemImage: "clock")
+        let localStatusBarObjects = EveryMinuteApp.statusBarObjects.sorted {
+            $0.position < $1.position
+        }
+        ForEach(localStatusBarObjects, id: \.name) {
+            statusBarObject in
+            if statusBarObject.displayed {
+                NavigationLink {
+                    // TODO: add types
+                    ViewWrapper(types: [], view: statusBarObject.view)
+                } label: {
+                    Label(
+                        statusBarObject.name,
+                        systemImage: statusBarObject.systemImage
+                    )
+                    .foregroundStyle(.primary)
+                }
             }
 #if os(macOS)
-            Divider()
+            if statusBarObject.dividerAfter {
+                Divider()
+            }
 #endif
-            NavigationLink {
-                HomeView()
-            } label: {
-                Label("Home", systemImage: "house")
-            }
-            NavigationLink {
-                // TODO: add calendar
-                Text("Not implemented yet")
-                    .navigationTitle("Calendar")
-            } label: {
-                Label("Calendar", systemImage: "calendar")
-            }
-            NavigationLink {
-                TasksView()
-            } label: {
-                Label("Tasks", systemImage: "clipboard")
-            }
+        }
     }
 }
 

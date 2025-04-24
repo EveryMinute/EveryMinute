@@ -10,6 +10,24 @@
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
+			<string>Security</string>
+			<key>FooterText</key>
+			<string>security_footer</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Erase data</string>
+			<key>Key</key>
+			<string></string>
+			<key>DefaultValue</key>
+			<false/>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
 			<string>about</string>
 			<key>FooterText</key>
 			<string>Build with ❤️‍🔥 in Stuttgart</string>
@@ -33,6 +51,14 @@
 			<string>app version</string>
 			<key>DefaultValue</key>
 			<string>1.0</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Legal</string>
+			<key>FooterText</key>
+			<string>© 2025 Julian Schumacher &amp; Rachel Sprio</string>
 		</dict>
 	</array>
 </dict>

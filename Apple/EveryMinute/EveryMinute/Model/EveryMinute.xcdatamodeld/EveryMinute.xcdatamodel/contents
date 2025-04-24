@@ -1,18 +1,60 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23605" systemVersion="24C101" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
-    <entity name="Routine" representedClassName="Routine" syncable="YES" codeGenerationType="class">
-        <attribute name="frequency" optional="YES" attributeType="Integer 16" defaultValueString="7" allowsCloudEncryption="YES" usesScalarValueType="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" defaultValueString="new Routine" allowsCloudEncryption="YES"/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23788" systemVersion="24E263" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+    <entity name="Assignment" representedClassName="Assignment" parentEntity="Reminder" syncable="YES" codeGenerationType="class">
+        <relationship name="documents" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CD_Document" inverseName="assignment" inverseEntity="CD_Document"/>
+    </entity>
+    <entity name="CalendarEntry" representedClassName="CalendarEntry" parentEntity="Entry" syncable="YES" codeGenerationType="class">
+        <attribute name="duration" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="interval" optional="YES" attributeType="Integer 32" defaultValueString="0" allowsCloudEncryption="YES" usesScalarValueType="YES"/>
+        <attribute name="location" optional="YES" attributeType="Composite" composite="Location"/>
         <attribute name="notes" optional="YES" attributeType="String" allowsCloudEncryption="YES"/>
+    </entity>
+    <entity name="CD_Document" representedClassName="CD_Document" syncable="YES" codeGenerationType="class">
+        <attribute name="data" optional="YES" attributeType="Binary" allowsCloudEncryption="YES"/>
+        <attribute name="fileType" optional="YES" attributeType="String" allowsCloudEncryption="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" allowsCloudEncryption="YES"/>
+        <relationship name="assignment" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Assignment" inverseName="documents" inverseEntity="Assignment"/>
+    </entity>
+    <entity name="Course" representedClassName="Course" parentEntity="Routine" syncable="YES" codeGenerationType="class">
+        <attribute name="evaluation" optional="YES" attributeType="Integer 16" defaultValueString="0" allowsCloudEncryption="YES" usesScalarValueType="YES"/>
+        <attribute name="grade" optional="YES" attributeType="Float" minValueString="0" maxValueString="6" defaultValueString="1" allowsCloudEncryption="YES" usesScalarValueType="YES"/>
+        <relationship name="lessons" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Lesson" inverseName="course" inverseEntity="Lesson"/>
+    </entity>
+    <entity name="Entry" representedClassName="Entry" isAbstract="YES" syncable="YES" codeGenerationType="class">
+        <attribute name="date" optional="YES" attributeType="Date" allowsCloudEncryption="YES" usesScalarValueType="NO"/>
+        <attribute name="name" optional="YES" attributeType="String" allowsCloudEncryption="YES"/>
+        <relationship name="profile" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Profile" inverseName="entries" inverseEntity="Profile"/>
+    </entity>
+    <entity name="Lesson" representedClassName="Lesson" parentEntity="CalendarEntry" syncable="YES" codeGenerationType="class">
+        <relationship name="course" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Course" inverseName="lessons" inverseEntity="Course"/>
+    </entity>
+    <entity name="Profile" representedClassName="Profile" syncable="YES" codeGenerationType="class">
+        <attribute name="color" optional="YES" attributeType="Composite" composite="Color" allowsCloudEncryption="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" allowsCloudEncryption="YES"/>
+        <relationship name="entries" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Entry" inverseName="profile" inverseEntity="Entry"/>
+    </entity>
+    <entity name="Reminder" representedClassName="Reminder" parentEntity="Entry" syncable="YES" codeGenerationType="class">
+        <attribute name="notes" optional="YES" attributeType="String" allowsCloudEncryption="YES"/>
+    </entity>
+    <entity name="Routine" representedClassName="Routine" parentEntity="Reminder" syncable="YES" codeGenerationType="class">
+        <attribute name="interval" optional="YES" attributeType="Integer 32" defaultValueString="0" allowsCloudEncryption="YES" usesScalarValueType="YES"/>
     </entity>
     <entity name="StatusbarObject" representedClassName="StatusbarObject" syncable="YES" codeGenerationType="class">
         <attribute name="displayed" optional="YES" attributeType="Boolean" defaultValueString="YES" allowsCloudEncryption="YES" usesScalarValueType="YES"/>
-        <attribute name="title" optional="YES" attributeType="String" allowsCloudEncryption="YES"/>
+        <attribute name="position" optional="YES" attributeType="Integer 16" minValueString="0" defaultValueString="0" allowsCloudEncryption="YES" usesScalarValueType="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" minValueString="2" maxValueString="100" defaultValueString="Sidebar Item" allowsCloudEncryption="YES"/>
     </entity>
-    <entity name="Task" representedClassName="Task" syncable="YES" codeGenerationType="class">
-        <attribute name="date" optional="YES" attributeType="Date" minDateTimeInterval="758733540" allowsCloudEncryption="YES" usesScalarValueType="NO"/>
-        <attribute name="done" optional="YES" attributeType="Boolean" defaultValueString="NO" allowsCloudEncryption="YES" usesScalarValueType="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" defaultValueString="new Task" allowsCloudEncryption="YES"/>
-        <attribute name="notes" optional="YES" attributeType="String" allowsCloudEncryption="YES"/>
-    </entity>
+    <composite name="Color">
+        <attribute name="red" optional="YES" attributeType="Integer 16" defaultValueString="0" allowsCloudEncryption="YES" usesScalarValueType="YES"/>
+        <attribute name="green" optional="YES" attributeType="Integer 16" defaultValueString="0" allowsCloudEncryption="YES" usesScalarValueType="YES"/>
+        <attribute name="blue" optional="YES" attributeType="Integer 16" defaultValueString="0" allowsCloudEncryption="YES" usesScalarValueType="YES"/>
+        <attribute name="alpha" optional="YES" attributeType="Integer 16" defaultValueString="0" allowsCloudEncryption="YES" usesScalarValueType="YES"/>
+    </composite>
+    <composite name="Location">
+        <attribute name="country" optional="YES" attributeType="String" allowsCloudEncryption="YES"/>
+        <attribute name="adress" optional="YES" attributeType="String" allowsCloudEncryption="YES"/>
+        <attribute name="zipCode" optional="YES" attributeType="String" minValueString="1" maxValueString="11" allowsCloudEncryption="YES"/>
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" allowsCloudEncryption="YES" usesScalarValueType="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" allowsCloudEncryption="YES" usesScalarValueType="YES"/>
+    </composite>
 </model>

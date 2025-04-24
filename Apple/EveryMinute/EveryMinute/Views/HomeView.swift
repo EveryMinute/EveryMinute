@@ -10,7 +10,10 @@ import SwiftUI
 struct HomeView: View {
     var body: some View {
         VStack {
-            
+#if os(iOS)
+            CalendarView()
+            TimetableView()
+#endif
         }
         .navigationTitle("Home")
 #if os(iOS)

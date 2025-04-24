@@ -8,6 +8,8 @@
 	<string>development</string>
 	<key>com.apple.developer.default-data-protection</key>
 	<string>NSFileProtectionComplete</string>
+	<key>com.apple.developer.healthkit</key>
+	<true/>
 	<key>com.apple.developer.icloud-container-identifiers</key>
 	<array>
 		<string>iCloud.dev.jules.EveryMinute</string>
@@ -15,6 +17,10 @@
 	<key>com.apple.developer.icloud-services</key>
 	<array>
 		<string>CloudKit</string>
+	</array>
+	<key>com.apple.developer.journal.allow</key>
+	<array>
+		<string>suggestions</string>
 	</array>
 	<key>com.apple.security.app-sandbox</key>
 	<true/>
