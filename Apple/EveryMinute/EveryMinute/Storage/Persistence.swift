@@ -14,7 +14,12 @@ struct PersistenceController {
     static let preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
-        for _ in 0..<10 {
+        // TODO: implement test objects
+        for i in 0..<4 {
+            let entry = CalendarEntry(context: viewContext)
+            entry.name = "Entry \(i)"
+            entry.date = Calendar.current.date(byAdding: .day, value: 1, to: Date.now)!
+            entry.duration = 1
         }
         do {
             try viewContext.save()

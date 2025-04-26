@@ -22,7 +22,16 @@ internal struct AddProfileView: View {
             do {
                 let p  = Profile(context: context)
                 p.name = name
-                p.color = ["red": 1, "green": 1, "blue": 1]
+                // Werte sind normiert zwischen 0 und 1
+                var red : CGFloat = 1
+                var green : CGFloat = 1
+                var blue : CGFloat = 1
+                UIColor(color).getRed(&red, green: &green, blue: &blue, alpha: nil)
+                p.color = [
+                    "red": red,
+                    "green": green,
+                    "blue": blue
+                ]
                 try context.save()
             } catch {
                 errSavingShown.toggle()
@@ -31,7 +40,7 @@ internal struct AddProfileView: View {
             List {
                 Section {
                     TextField("Name", text: $name)
-                    ColorPicker("Color", selection: $color, supportsOpacity: true)
+                    ColorPicker("Color", selection: $color, supportsOpacity: false)
                 } header: {
                     Text("Information")
                 } footer: {

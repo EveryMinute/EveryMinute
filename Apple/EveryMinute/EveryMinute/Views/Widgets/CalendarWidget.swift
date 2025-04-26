@@ -12,22 +12,31 @@ internal struct CalendarWidget: View {
     
     @Environment(\.managedObjectContext) var context
     
-    internal var date : Date = Date.now
-    
     @State private var entries : [CalendarEntry] = []
     
     @State private var errLoadingEntriesShown : Bool = false
     
     var body: some View {
-        VStack {
-            ForEach(entries) {
-                entry in
-                event(for: entry)
+        ZStack {
+            VStack {
+                ForEach(0..<5) {
+                    _ in
+                    Divider()
+                        .padding(.bottom, 50)
+                }
+            }
+            VStack(spacing: 12) {
+                ForEach(entries) {
+                    entry in
+                    event(for: entry)
+                }
             }
         }
         .onAppear {
             do {
-                entries = try Storage.loadCalendarEntries(context)
+                entries = try Storage.loadCalendarEntries(context,
+                                                          from: Date.now,
+                                                          count: 3)
             } catch {
                 errLoadingEntriesShown.toggle()
             }
@@ -37,18 +46,18 @@ internal struct CalendarWidget: View {
     @ViewBuilder
     private func event(for entry : CalendarEntry) -> some View {
         Text(entry.name!)
-            .padding(.top, 12.5)
-            .padding(.bottom, 75)
-            .padding(.leading, 12.5)
-            .padding(.trailing, 250)
+            .padding(.top, 10)
+            .padding(.bottom, 35)
+            .padding(.leading, 20)
+            .padding(.trailing, 275)
             .background(
                 Color(
                     UIColor(
                         // Questions marks because profile is optional, the color composite type too, and the case to CGFloat should only happen, when the color value in non nil. After the double question mark is the default value for this attribute
-                        red: entry.profile?.color?["red"] as? CGFloat ?? 255,
-                        green: entry.profile?.color?["green"] as? CGFloat ?? 255,
-                        blue: entry.profile?.color?["blue"] as? CGFloat ?? 255,
-                        alpha: entry.profile?.color?["alpha"] as? CGFloat ?? 1
+                        red: entry.profile?.color?["red"] as? CGFloat ?? 0.76,
+                        green: entry.profile?.color?["green"] as? CGFloat ?? 0,
+                        blue: entry.profile?.color?["blue"] as? CGFloat ?? 1,
+                        alpha: 0.5
                     )
                 )
             )
@@ -58,6 +67,8 @@ internal struct CalendarWidget: View {
 
 #Preview {
     NavigationStack {
-        CalendarWidget(date: Date.now)
+        CalendarWidget()
+            .environment(\.managedObjectContext,
+                          PersistenceController.preview.container.viewContext)
     }
 }
