@@ -9,8 +9,12 @@ import SwiftUI
 
 struct TodayView: View {
     var body: some View {
-        List {
-            CalendarWidget()
+        GeometryReader {
+            geo in
+            List {
+                CalendarWidget()
+                    .frame(height: geo.size.height / 5)
+            }
         }
         .navigationTitle("Today")
 #if os(iOS)

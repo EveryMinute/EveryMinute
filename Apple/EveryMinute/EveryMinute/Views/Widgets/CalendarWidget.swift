@@ -17,18 +17,21 @@ internal struct CalendarWidget: View {
     @State private var errLoadingEntriesShown : Bool = false
     
     var body: some View {
-        ZStack {
-            VStack {
-                ForEach(0..<5) {
-                    _ in
-                    Divider()
-                        .padding(.bottom, 50)
+        GeometryReader {
+            metrics in
+            ZStack {
+                VStack {
+                    ForEach(0..<5) {
+                        _ in
+                        Divider()
+                            .padding(.vertical, metrics.size.height / 50)
+                    }
                 }
-            }
-            VStack(spacing: 12) {
-                ForEach(entries) {
-                    entry in
-                    event(for: entry)
+                VStack(spacing: 12) {
+                    ForEach(entries) {
+                        entry in
+                        event(for: entry)
+                    }
                 }
             }
         }
@@ -36,7 +39,7 @@ internal struct CalendarWidget: View {
             do {
                 entries = try Storage.loadCalendarEntries(context,
                                                           from: Date.now,
-                                                          count: 3)
+                                                          count: 2)
             } catch {
                 errLoadingEntriesShown.toggle()
             }

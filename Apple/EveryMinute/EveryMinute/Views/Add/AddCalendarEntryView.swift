@@ -93,9 +93,8 @@ internal struct AddCalendarEntryView: View {
                     "country": country,
                     "zipCode": zip,
                     "address": address,
-                    // TODO: add coordinates
-                    "longitude": 0.0,
-                    "latitude": 0.0
+                    "longitude": coordinates.longitude,
+                    "latitude": coordinates.longitude
                 ]
                 c.notes = notes
                 c.profile = profile
@@ -225,6 +224,7 @@ internal struct AddCalendarEntryView: View {
         ) ?? endDate
     }
     
+    /// Sets the interval as an int
     private func setInterval() -> Void {
         interval = switch period {
         case .hourly:
@@ -247,13 +247,14 @@ internal struct AddCalendarEntryView: View {
         let coder = CLGeocoder()
         coder.geocodeAddressString("\(address), \(zip), \(country)") {
             placemarks, error in
-            // TODO: implement location handling
             guard
                 let placemark = placemarks,
                 let location = placemark.first?.location
             else {
-                // TODO: remove print and implement error handling
-                print("Couldn't find coordinates \(error)")
+                EveryMinuteApp.logger.log(
+                    level: .error,
+                    "Error finding location for provided address parts:\n[Error: \(String(describing: error))]\nProvided parts: \(address),\(zip), \(country)"
+                )
                 return
             }
             coordinates = location.coordinate

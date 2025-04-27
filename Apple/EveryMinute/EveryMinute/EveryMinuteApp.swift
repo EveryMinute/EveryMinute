@@ -6,10 +6,16 @@
 //
 
 import SwiftUI
+import OSLog
 
 @main
 struct EveryMinuteApp: App {
-    let persistenceController = PersistenceController.shared
+    
+    /// The shared persistence Controller with context to interact with core data used across the app
+    private static let persistenceController = PersistenceController.shared
+    
+    /// The logger used to log important events and errors in the App
+    internal static let logger : Logger = Logger()
     
     /// The initial array of status bar objects
     @State internal static var statusBarObjects : [StatusbarItem] = [
@@ -47,7 +53,7 @@ struct EveryMinuteApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .environment(\.managedObjectContext, EveryMinuteApp.persistenceController.container.viewContext)
         }
         #if os(macOS)
         Settings {

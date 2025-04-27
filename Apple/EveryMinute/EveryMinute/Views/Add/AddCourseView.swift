@@ -22,9 +22,10 @@ internal struct AddCourseView: View {
     
     @State private var selectedChapter : Chapter?
     
+    @State private var errSavingChapterShown : Bool = false
+    
     var body: some View {
         AddItemSheetWrapper(doneDisabled: .constant(false)) {
-            // TODO: implement done
             do {
                 let course = Course(context: context)
                 course.name = name
@@ -35,7 +36,10 @@ internal struct AddCourseView: View {
                 course.chapters?.adding(selectedChapter!)
                 try context.save()
             } catch {
-                // TODO: implement error
+                EveryMinuteApp.logger.log(
+                        level: .error, "Error saving new course: [\(error)]"
+                )
+                errSavingChapterShown.toggle()
             }
         } content: {
             List {
@@ -49,6 +53,11 @@ internal struct AddCourseView: View {
                         Text(chapter.name!).tag(chapter as Chapter?)
                     }
                 }
+            }
+            .alert("Error saving", isPresented: $errSavingChapterShown) {
+                
+            } message: {
+                Text("An error appeared while trying to save the coure")
             }
         }
     }
