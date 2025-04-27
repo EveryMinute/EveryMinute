@@ -45,7 +45,9 @@ internal struct AddCourseView: View {
             List {
                 TextField("Name", text: $name)
                 TextField("Evaluation (in %)", text: $eval)
+                #if os(iOS)
                     .keyboardType(.numbersAndPunctuation)
+                #endif
                 Picker("Chapter", selection: $selectedChapter) {
                     Text("No chapter").tag(nil as Chapter?)
                     ForEach(chapters) {

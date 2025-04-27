@@ -31,6 +31,8 @@ internal struct AddItemMenuWrapper<Content>: View where Content : View {
     
     @State private var addProfileShown : Bool = false
     
+    @State private var addLessonShown : Bool = false
+    
     internal init(types : [AddType], @ViewBuilder content : @escaping () -> Content) {
         self.types = types
         self.content = content
@@ -47,9 +49,6 @@ internal struct AddItemMenuWrapper<Content>: View where Content : View {
                                 addRoutineShown.toggle()
                             } label: {
                                 Label("Add Routine", systemImage: "clock")
-                            }
-                            .popover(isPresented: $addRoutineShown) {
-                                AddRoutineView()
                             }
                             Divider()
                         }
@@ -74,16 +73,13 @@ internal struct AddItemMenuWrapper<Content>: View where Content : View {
                             } label: {
                                 Label("Add Calendar Entry", systemImage: "calendar")
                             }
-                            .popover(isPresented: $addCalendarEntryShown) {
-                                AddCalendarEntryView()
-                            }
                             Divider()
                         }
                         
                         /* Lesson */
                         if types.contains(.lesson) {
                             Button {
-                                
+                                addLessonShown.toggle()
                             } label: {
                                 Label("Add Lesson", systemImage: "calendar")
                             }
@@ -97,9 +93,6 @@ internal struct AddItemMenuWrapper<Content>: View where Content : View {
                             } label: {
                                 Label("Add Course", systemImage: "graduationcap")
                             }
-                            .popover(isPresented: $addCourseShown) {
-                                AddCourseView()
-                            }
                             Divider()
                         }
                         
@@ -109,11 +102,23 @@ internal struct AddItemMenuWrapper<Content>: View where Content : View {
                         } label: {
                             Label("Add Profile", systemImage: "person")
                         }
-                        .popover(isPresented: $addProfileShown) {
-                            AddProfileView()
-                        }
                     } label: {
                         Image(systemName: "plus")
+                    }
+                    .popover(isPresented: $addRoutineShown) {
+                        AddRoutineView(type: .routine)
+                    }
+                    .popover(isPresented: $addCalendarEntryShown) {
+                        AddRoutineView(type: .calendarEntry)
+                    }
+                    .popover(isPresented: $addCourseShown) {
+                        AddCourseView()
+                    }
+                    .popover(isPresented: $addProfileShown) {
+                        AddProfileView()
+                    }
+                    .popover(isPresented: $addLessonShown) {
+                        AddRoutineView(type: .lesson)
                     }
                 }
             }

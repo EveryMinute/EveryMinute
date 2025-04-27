@@ -53,6 +53,7 @@ internal struct CalendarWidget: View {
             .padding(.bottom, 35)
             .padding(.leading, 20)
             .padding(.trailing, 275)
+#if os(iOS)
             .background(
                 Color(
                     UIColor(
@@ -64,6 +65,20 @@ internal struct CalendarWidget: View {
                     )
                 )
             )
+#endif
+#if os(macOS)
+            .background(
+                Color(
+                    NSColor(
+                        // Questions marks because profile is optional, the color composite type too, and the case to CGFloat should only happen, when the color value in non nil. After the double question mark is the default value for this attribute
+                        red: entry.profile?.color?["red"] as? CGFloat ?? 0.76,
+                        green: entry.profile?.color?["green"] as? CGFloat ?? 0,
+                        blue: entry.profile?.color?["blue"] as? CGFloat ?? 1,
+                        alpha: 0.5
+                    )
+                )
+            )
+#endif
             .containerShape(RoundedRectangle(cornerRadius: 25))
     }
 }

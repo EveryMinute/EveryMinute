@@ -26,7 +26,12 @@ internal struct AddProfileView: View {
                 var red : CGFloat = 1
                 var green : CGFloat = 1
                 var blue : CGFloat = 1
+#if os(iOS)
                 UIColor(color).getRed(&red, green: &green, blue: &blue, alpha: nil)
+#endif
+#if os(macOS)
+                NSColor(color).getRed(&red, green: &green, blue: &blue, alpha: nil)
+#endif
                 p.color = [
                     "red": red,
                     "green": green,
