@@ -21,8 +21,7 @@ internal struct ContentView: View {
                 .navigationTitle("EveryMinute")
                 .navigationBarTitleDisplayMode(.automatic)
             }
-#endif
-#if os(macOS)
+            #elseif os(macOS)
             VStack {
                 VStack(alignment: .leading, spacing: 20) {
                     sidebarList()

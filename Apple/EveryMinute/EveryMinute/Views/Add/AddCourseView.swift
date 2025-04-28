@@ -62,6 +62,10 @@ internal struct AddCourseView: View {
                 Text("An error appeared while trying to save the coure")
             }
         }
+        .navigationTitle("New Course")
+        #if os(iOS)
+        .navigationBarTitleDisplayMode(.automatic)
+        #endif
     }
 }
 

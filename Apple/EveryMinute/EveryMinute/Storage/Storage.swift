@@ -47,7 +47,8 @@ internal struct Storage {
     
     /* DELETE DATA */
     
-    internal static func eraseAllData() -> Void {
-        // TODO: implement erase
+    /// Deletes all data in the app
+    internal static func eraseAllData(context: NSManagedObjectContext) -> Void {
+        // TODO: implement erase Data
     }
 }

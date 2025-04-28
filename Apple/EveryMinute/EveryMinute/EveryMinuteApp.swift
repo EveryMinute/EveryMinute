@@ -55,7 +55,7 @@ struct EveryMinuteApp: App {
             ContentView()
                 .environment(\.managedObjectContext, EveryMinuteApp.persistenceController.container.viewContext)
                 .onAppear {
-                    SettingsHelper.setUp()
+                    SettingsHelper.setUp(context: EveryMinuteApp.persistenceController.container.viewContext)
                 }
         }
         #if os(macOS)

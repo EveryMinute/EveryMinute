@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreData
 
 private enum Settings : String, RawRepresentable {
     case appVersion = "app_version_setting"
@@ -16,10 +17,10 @@ private enum Settings : String, RawRepresentable {
 internal struct SettingsHelper {
     
     /// Setup function to call when starting the app
-    internal static func setUp() -> Void {
+    internal static func setUp(context : NSManagedObjectContext) -> Void {
         updateVersion()
         if checkEraseData() {
-            eraseAllData()
+            eraseAllData(context: context)
         }
     }
     
@@ -41,7 +42,7 @@ internal struct SettingsHelper {
     }
     
     /// Actually erases data on the system
-    internal static func eraseAllData() -> Void {
-        Storage.eraseAllData()
+    internal static func eraseAllData(context : NSManagedObjectContext) -> Void {
+        Storage.eraseAllData(context: context)
     }
 }

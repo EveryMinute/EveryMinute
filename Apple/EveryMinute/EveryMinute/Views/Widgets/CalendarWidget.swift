@@ -65,8 +65,7 @@ internal struct CalendarWidget: View {
                     )
                 )
             )
-#endif
-#if os(macOS)
+#elseif os(macOS)
             .background(
                 Color(
                     NSColor(

@@ -5,3 +5,5 @@
 "additional_legal_footer_text" = "no additional legal information";
 "copyright" = "copyright";
 "copyright_footer_text" = "© 2025 Julian Schumacher & Rachel Sprio";
+"privacy" = "privacy";
+"privacy_footer_text" = "Privacy Policy and Data Security Policy can be found unter https://julianschumacher.dev/legal/privacy";

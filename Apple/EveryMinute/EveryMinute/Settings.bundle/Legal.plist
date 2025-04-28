@@ -12,6 +12,14 @@
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
+			<string>privacy</string>
+			<key>FooterText</key>
+			<string>privacy_footer_text</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
 			<string>Legal</string>
 			<key>FooterText</key>
 			<string>legal_footer_text</string>

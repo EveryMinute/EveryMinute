@@ -13,6 +13,7 @@ internal enum AddType : CaseIterable {
     case task
     case lesson
     case course
+    case chapter
 }
 
 internal struct AddItemMenuWrapper<Content>: View where Content : View {
@@ -32,6 +33,8 @@ internal struct AddItemMenuWrapper<Content>: View where Content : View {
     @State private var addProfileShown : Bool = false
     
     @State private var addLessonShown : Bool = false
+    
+    @State private var addChapterShown : Bool = false
     
     internal init(types : [AddType], @ViewBuilder content : @escaping () -> Content) {
         self.types = types
@@ -96,6 +99,16 @@ internal struct AddItemMenuWrapper<Content>: View where Content : View {
                             Divider()
                         }
                         
+                        /* Chapter */
+                        if types.contains(.chapter) {
+                            Button {
+                                addChapterShown.toggle()
+                            } label: {
+                                Label("Add Chapter", systemImage: "calendar.badge.clock")
+                            }
+                            Divider()
+                        }
+                        
                         /* Profile */
                         Button {
                             addProfileShown.toggle()
@@ -119,6 +132,9 @@ internal struct AddItemMenuWrapper<Content>: View where Content : View {
                     }
                     .popover(isPresented: $addLessonShown) {
                         AddRoutineView(type: .lesson)
+                    }
+                    .popover(isPresented: $addChapterShown) {
+                        AddChapterView()
                     }
                 }
             }

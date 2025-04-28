@@ -9,6 +9,8 @@ import SwiftUI
 
 struct SecuritySettingsView: View {
     
+    @Environment(\.managedObjectContext) private var context
+    
     @State private var eraseDataWarningShown : Bool = false
     
     @State private var errEreasingDataShown : Bool = false
@@ -58,7 +60,7 @@ struct SecuritySettingsView: View {
     
     /// erases all data and returns a bool indicating the success of the operation
     private func eraseAllData() -> Bool {
-        SettingsHelper.eraseAllData()
+        SettingsHelper.eraseAllData(context: context)
         // TODO: implement user feedback
         return false
     }

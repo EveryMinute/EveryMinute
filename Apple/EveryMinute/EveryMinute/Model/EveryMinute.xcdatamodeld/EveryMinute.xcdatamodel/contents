@@ -16,7 +16,7 @@
     </entity>
     <entity name="Chapter" representedClassName="Chapter" parentEntity="Entry" syncable="YES" codeGenerationType="class">
         <attribute name="color" optional="YES" attributeType="Composite" composite="Color" allowsCloudEncryption="YES"/>
-        <attribute name="endDate" optional="YES" attributeType="String"/>
+        <attribute name="endDate" optional="YES" attributeType="Date" allowsCloudEncryption="YES" usesScalarValueType="NO"/>
         <relationship name="courses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Course" inverseName="chapters" inverseEntity="Course"/>
     </entity>
     <entity name="Course" representedClassName="Course" syncable="YES" codeGenerationType="class">
