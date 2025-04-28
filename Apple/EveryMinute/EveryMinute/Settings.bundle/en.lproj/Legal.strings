@@ -1,0 +1,7 @@
+"Legal" = "Legal";
+// TODO: add legal footer
+"legal_footer_text" = "";
+"additional legal information" = "additional legal information";
+"additional_legal_footer_text" = "no additional legal information";
+"copyright" = "copyright";
+"copyright_footer_text" = "© 2025 Julian Schumacher & Rachel Sprio";

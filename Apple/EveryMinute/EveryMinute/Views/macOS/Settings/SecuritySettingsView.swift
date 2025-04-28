@@ -58,7 +58,8 @@ struct SecuritySettingsView: View {
     
     /// erases all data and returns a bool indicating the success of the operation
     private func eraseAllData() -> Bool {
-        // TODO: implement
+        SettingsHelper.eraseAllData()
+        // TODO: implement user feedback
         return false
     }
 }

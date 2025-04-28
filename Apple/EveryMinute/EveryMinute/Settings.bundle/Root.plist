@@ -4,8 +4,18 @@
 <dict>
 	<key>StringsTable</key>
 	<string>Root</string>
+	<key>Title</key>
+	<string>General</string>
 	<key>PreferenceSpecifiers</key>
 	<array>
+		<dict>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+			<key>Title</key>
+			<string>Legal</string>
+			<key>File</key>
+			<string>Legal</string>
+		</dict>
 		<dict>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
@@ -20,7 +30,7 @@
 			<key>Title</key>
 			<string>Erase data</string>
 			<key>Key</key>
-			<string></string>
+			<string>erase_data_setting</string>
 			<key>DefaultValue</key>
 			<false/>
 		</dict>
@@ -51,14 +61,6 @@
 			<string>app version</string>
 			<key>DefaultValue</key>
 			<string>1.0</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-			<key>Title</key>
-			<string>Legal</string>
-			<key>FooterText</key>
-			<string>© 2025 Julian Schumacher &amp; Rachel Sprio</string>
 		</dict>
 	</array>
 </dict>

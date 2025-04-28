@@ -46,4 +46,8 @@ internal struct Storage {
     /* SAVE DATA */
     
     /* DELETE DATA */
+    
+    internal static func eraseAllData() -> Void {
+        // TODO: implement erase
+    }
 }
