@@ -7,10 +7,9 @@
 
 import SwiftUI
 
-struct CalendarView: View {
+internal struct CalendarView: View {
     var body: some View {
-        VStack {
-            
+        ZStack {
         }
         .navigationTitle("Calendar")
     }

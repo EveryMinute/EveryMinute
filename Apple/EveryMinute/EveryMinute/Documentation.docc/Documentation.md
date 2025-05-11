@@ -1,10 +1,10 @@
 # ``EveryMinute``
 
-<!--@START_MENU_TOKEN@-->Summary<!--@END_MENU_TOKEN@-->
+A small App to organize and optimize every minute of your life
 
 ## Overview
 
-<!--@START_MENU_TOKEN@-->Text<!--@END_MENU_TOKEN@-->
+This App provides the option to add different events to your calendar and optimize your life with routines, tasks, calender entries and life events.
 
 ## Topics
 

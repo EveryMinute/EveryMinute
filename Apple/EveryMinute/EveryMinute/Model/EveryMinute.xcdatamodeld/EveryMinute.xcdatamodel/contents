@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23788" systemVersion="24E263" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="Assignment" representedClassName="Assignment" parentEntity="Entry" syncable="YES" codeGenerationType="class">
+        <attribute name="completed" optional="YES" attributeType="Boolean" defaultValueString="NO" allowsCloudEncryption="YES" usesScalarValueType="YES"/>
         <relationship name="documents" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CD_Document" inverseName="assignment" inverseEntity="CD_Document"/>
     </entity>
     <entity name="CalendarEntry" representedClassName="CalendarEntry" parentEntity="Routine" syncable="YES" codeGenerationType="class">
