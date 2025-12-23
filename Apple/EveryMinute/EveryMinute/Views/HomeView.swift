@@ -9,13 +9,15 @@ import SwiftUI
 
 struct HomeView: View {
     var body: some View {
-        VStack {
+        NavigationStack {
+            VStack {
 #if os(iOS)
-            CalendarView()
-            TimetableView()
+                CalendarView()
+                TimetableView()
 #endif
+            }
+            .navigationTitle("Home")
         }
-        .navigationTitle("Home")
 #if os(iOS)
         .navigationBarTitleDisplayMode(.automatic)
 #endif
